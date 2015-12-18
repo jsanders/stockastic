@@ -15,8 +15,7 @@ defmodule Stockastic.Tickertape do
         IO.puts "Received close (#{reason}), reconnecting…"
         [ _, _, ws ] = connect!(account, exchange)
       packet ->
-        IO.puts "Unknown packet: #{inspect(packet)}"
-        [ _, _, ws ] = connect!(account, exchange)
+        raise "Unknown packet: #{inspect(packet)}"
     end
     loop!([ account, exchange, ws ], callback)
   end
